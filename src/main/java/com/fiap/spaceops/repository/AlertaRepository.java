@@ -10,9 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AlertaRepository extends JpaRepository<Alerta, Long> {
 
-    /** Alertas filtrados por status (ex: listar apenas ABERTO). */
     Page<Alerta> findByStatus(StatusAlerta status, Pageable pageable);
 
-    /** Contagem de alertas por status (dashboard / metricas). */
     long countByStatus(StatusAlerta status);
 }

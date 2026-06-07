@@ -14,9 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Regras de negocio para Sensor.
- */
 @Service
 @RequiredArgsConstructor
 public class SensorService {
@@ -89,7 +86,6 @@ public class SensorService {
                 .orElseThrow(() -> new ResourceNotFoundException("Sensor", id));
     }
 
-    /** Regra de negocio: threshold minimo nao pode ser maior que o maximo. */
     private void validarThresholds(SensorRequest request) {
         if (request.thresholdMinimo().compareTo(request.thresholdMaximo()) > 0) {
             throw new BusinessException(

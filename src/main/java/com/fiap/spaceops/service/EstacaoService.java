@@ -14,9 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Regras de negocio para Estacao.
- */
 @Service
 @RequiredArgsConstructor
 public class EstacaoService {
@@ -72,7 +69,6 @@ public class EstacaoService {
         estacaoRepository.delete(estacao);
     }
 
-    /** Recupera a entidade ou lanca 404. Reutilizado internamente e por outros services. */
     @Transactional(readOnly = true)
     public Estacao buscarEntidade(Long id) {
         return estacaoRepository.findById(id)

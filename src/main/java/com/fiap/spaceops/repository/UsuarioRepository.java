@@ -9,9 +9,7 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    /** Usado pelo UserDetailsService no fluxo de autenticacao. */
     Optional<Usuario> findByEmail(String email);
 
-    /** Evita cadastro duplicado de email no registro. */
     boolean existsByEmail(String email);
 }

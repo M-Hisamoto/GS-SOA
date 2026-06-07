@@ -11,13 +11,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Estacao = base ou modulo fisico onde sensores estao instalados.
- *
- * Exemplos:
- *  - ESPACIAL: "Base Lunar Artemis - Polo Sul", "Modulo Habitacional Marte-01"
- *  - TERRESTRE: "Estacao Amazonia Norte", "Plataforma Offshore P-77"
- */
 @Entity
 @Table(name = "tb_estacao")
 @Getter

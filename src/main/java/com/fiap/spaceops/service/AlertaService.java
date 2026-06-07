@@ -16,13 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
-/**
- * Regras de negocio para Alerta.
- *
- * Alertas nao sao criados via endpoint publico: nascem automaticamente quando uma
- * Leitura viola o threshold (ver LeituraService). O operador apenas os consulta,
- * resolve ou descarta.
- */
 @Service
 @RequiredArgsConstructor
 public class AlertaService {
@@ -42,10 +35,6 @@ public class AlertaService {
         return AlertaResponse.fromEntity(buscarEntidade(id));
     }
 
-    /**
-     * Transiciona o status de um alerta (resolver, descartar, colocar em analise).
-     * Valida que um alerta ja finalizado nao seja reaberto.
-     */
     @Transactional
     public AlertaResponse atualizarStatus(Long id, StatusAlerta novoStatus) {
         Alerta alerta = buscarEntidade(id);
@@ -64,10 +53,6 @@ public class AlertaService {
                 .orElseThrow(() -> new ResourceNotFoundException("Alerta", id));
     }
 
-    /**
-     * Cria um Alerta a partir de uma Leitura que violou o threshold.
-     * Chamado internamente pelo LeituraService (mesma transacao).
-     */
     Alerta gerarParaLeitura(Leitura leitura) {
         Sensor sensor = leitura.getSensor();
         BigDecimal valor = leitura.getValor();

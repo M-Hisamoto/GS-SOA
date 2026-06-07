@@ -7,10 +7,6 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-/**
- * Dados de entrada para criar/atualizar um Sensor.
- * A validacao thresholdMinimo <= thresholdMaximo e feita no Service (regra de negocio).
- */
 public record SensorRequest(
 
         @NotBlank(message = "O identificador do sensor e obrigatorio.")

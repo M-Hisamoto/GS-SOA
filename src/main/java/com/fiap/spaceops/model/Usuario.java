@@ -13,9 +13,6 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Usuario da plataforma. Implementa UserDetails para integracao direta com Spring Security.
- */
 @Entity
 @Table(name = "tb_usuario", uniqueConstraints = {
         @UniqueConstraint(name = "uk_usuario_email", columnNames = "email")
@@ -49,8 +46,6 @@ public class Usuario implements UserDetails {
     @CreatedDate
     @Column(name = "criado_em", nullable = false, updatable = false)
     private LocalDateTime criadoEm;
-
-    // ===== UserDetails =====
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -5,9 +5,6 @@ import com.fiap.spaceops.model.enums.StatusAlerta;
 
 import java.time.LocalDateTime;
 
-/**
- * Representacao de saida de um Alerta.
- */
 public record AlertaResponse(
         Long id,
         String mensagem,

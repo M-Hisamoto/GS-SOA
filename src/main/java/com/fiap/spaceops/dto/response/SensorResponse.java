@@ -6,10 +6,6 @@ import com.fiap.spaceops.model.enums.TipoSensor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * Representacao de saida de um Sensor.
- * Traz o id e nome da estacao (sem serializar a entidade inteira).
- */
 public record SensorResponse(
         Long id,
         String identificador,

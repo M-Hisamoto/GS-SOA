@@ -9,12 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * Sensor fisico instalado em uma estacao.
- *
- * Carrega os thresholds que definem a faixa segura de operacao.
- * Quando uma Leitura cai fora desta faixa, um Alerta e gerado automaticamente.
- */
 @Entity
 @Table(name = "tb_sensor", indexes = {
         @Index(name = "idx_sensor_estacao", columnList = "estacao_id"),
@@ -59,9 +53,6 @@ public class Sensor {
     @Column(name = "criado_em", nullable = false, updatable = false)
     private LocalDateTime criadoEm;
 
-    /**
-     * Indica se o valor informado esta dentro da faixa segura do sensor.
-     */
     public boolean dentroDoThreshold(BigDecimal valor) {
         return valor.compareTo(thresholdMinimo) >= 0
                 && valor.compareTo(thresholdMaximo) <= 0;

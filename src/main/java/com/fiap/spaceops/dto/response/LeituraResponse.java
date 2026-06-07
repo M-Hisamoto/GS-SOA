@@ -5,10 +5,6 @@ import com.fiap.spaceops.model.Leitura;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * Representacao de saida de uma Leitura.
- * O campo alertaGerado indica se a leitura violou o threshold e disparou um Alerta.
- */
 public record LeituraResponse(
         Long id,
         BigDecimal valor,

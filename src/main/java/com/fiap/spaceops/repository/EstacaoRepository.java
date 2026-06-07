@@ -10,9 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EstacaoRepository extends JpaRepository<Estacao, Long> {
 
-    /** Listagem paginada filtrando por ambiente (ESPACIAL / TERRESTRE). */
     Page<Estacao> findByAmbiente(AmbienteEstacao ambiente, Pageable pageable);
 
-    /** Listagem paginada apenas de estacoes ativas. */
     Page<Estacao> findByAtivaTrue(Pageable pageable);
 }

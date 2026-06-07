@@ -9,12 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-/**
- * Alerta = situacao gerada quando uma Leitura cai fora dos thresholds do Sensor.
- *
- * E criado automaticamente pelo LeituraService no momento da persistencia da Leitura.
- * Pode ser resolvido ou descartado por um operador via endpoint dedicado.
- */
 @Entity
 @Table(name = "tb_alerta", indexes = {
         @Index(name = "idx_alerta_status", columnList = "status")

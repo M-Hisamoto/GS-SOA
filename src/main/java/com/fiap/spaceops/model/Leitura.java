@@ -8,11 +8,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * Leitura = registro de telemetria de um sensor em um dado momento.
- *
- * Ao ser criada via Service, dispara avaliacao de threshold e pode gerar um Alerta.
- */
 @Entity
 @Table(name = "tb_leitura", indexes = {
         @Index(name = "idx_leitura_sensor", columnList = "sensor_id"),

@@ -18,15 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Regras de negocio para Leitura.
- *
- * Destaque arquitetural: ao registrar uma leitura, o Service avalia o threshold do
- * sensor e, em caso de violacao, gera um Alerta automaticamente DENTRO DA MESMA
- * TRANSACAO. Essa orquestracao entre Leitura e Alerta e exatamente o tipo de regra
- * que justifica a existencia da camada Service (nao e um simples passa-bola para o
- * Repository).
- */
 @Service
 @RequiredArgsConstructor
 public class LeituraService {
@@ -37,7 +28,6 @@ public class LeituraService {
 
     @Transactional(readOnly = true)
     public Page<LeituraResponse> listarPorSensor(Long sensorId, Pageable pageable) {
-        // Garante que o sensor existe antes de listar (404 claro)
         sensorService.buscarEntidade(sensorId);
         return leituraRepository.findBySensorId(sensorId, pageable)
                 .map(LeituraResponse::fromEntity);
@@ -75,10 +65,6 @@ public class LeituraService {
         return LeituraResponse.fromEntity(leitura);
     }
 
-    /**
-     * Registra uma nova leitura. Se o valor violar o threshold do sensor,
-     * um Alerta e gerado automaticamente na mesma transacao.
-     */
     @Transactional
     public LeituraResponse registrar(LeituraRequest request) {
         Sensor sensor = sensorService.buscarEntidade(request.sensorId());
@@ -96,7 +82,6 @@ public class LeituraService {
 
         Leitura salva = leituraRepository.save(leitura);
 
-        // Regra central: avalia threshold e dispara alerta se necessario
         if (!sensor.dentroDoThreshold(salva.getValor())) {
             Alerta alerta = alertaService.gerarParaLeitura(salva);
             salva.setAlerta(alerta);

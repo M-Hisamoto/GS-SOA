@@ -5,9 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-/**
- * Dados de entrada para criar/atualizar uma Estacao.
- */
 public record EstacaoRequest(
 
         @NotBlank(message = "O nome da estacao e obrigatorio.")

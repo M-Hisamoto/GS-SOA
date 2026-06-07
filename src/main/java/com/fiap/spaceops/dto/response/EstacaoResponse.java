@@ -5,10 +5,6 @@ import com.fiap.spaceops.model.enums.AmbienteEstacao;
 
 import java.time.LocalDateTime;
 
-/**
- * Representacao de saida de uma Estacao.
- * Inclui a contagem de sensores sem expor a colecao completa (evita over-fetching).
- */
 public record EstacaoResponse(
         Long id,
         String nome,
