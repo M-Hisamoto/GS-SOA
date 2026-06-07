@@ -1,6 +1,8 @@
 package com.fiap.spaceops.config;
 
 import com.fiap.spaceops.security.JwtAuthenticationFilter;
+import com.fiap.spaceops.security.RestAccessDeniedHandler;
+import com.fiap.spaceops.security.RestAuthenticationEntryPoint;
 import com.fiap.spaceops.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,8 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsServiceImpl userDetailsService;
+    private final RestAuthenticationEntryPoint authenticationEntryPoint;
+    private final RestAccessDeniedHandler accessDeniedHandler;
 
     private static final String[] ENDPOINTS_PUBLICOS = {
             "/auth/**",
@@ -47,6 +51,10 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler)
+                )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
